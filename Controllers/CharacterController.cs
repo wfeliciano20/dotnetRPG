@@ -1,10 +1,12 @@
 using dotnetRPG.Dtos;
 using dotnetRPG.Models;
 using dotnetRPG.Services.CharacterServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetRPG.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CharacterController : ControllerBase
