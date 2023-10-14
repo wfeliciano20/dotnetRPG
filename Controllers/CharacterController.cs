@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Security.Claims;
 using dotnetRPG.Dtos;
 using dotnetRPG.Models;
 using dotnetRPG.Services.CharacterServices;
@@ -22,7 +24,8 @@ namespace dotnetRPG.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<CharacterResponseDto>>>> Get()
         {
-            return Ok(await _characterService.GetAllCharacters());
+            int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value);
+            return Ok(await _characterService.GetAllCharacters(userId));
         }
 
         [HttpGet("{id}")]
