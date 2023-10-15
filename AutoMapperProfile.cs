@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using dotnetRPG.Dtos;
+using dotnetRPG.Dtos.Skill;
 using dotnetRPG.Models;
 
 namespace dotnetRPG
@@ -14,6 +11,8 @@ namespace dotnetRPG
         {
             CreateMap<Character, CharacterResponseDto>();
             CreateMap<CharacterRequestDto, Character>();
+            CreateMap<Weapon,GetWeaponDto>();
+            CreateMap<Skill,GetSkillDto>();
         }
     }
 }

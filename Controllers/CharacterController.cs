@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Security.Claims;
 using dotnetRPG.Dtos;
+using dotnetRPG.Dtos.Skill;
 using dotnetRPG.Models;
 using dotnetRPG.Services.CharacterServices;
 using Microsoft.AspNetCore.Authorization;
@@ -24,8 +25,7 @@ namespace dotnetRPG.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<CharacterResponseDto>>>> Get()
         {
-            int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value);
-            return Ok(await _characterService.GetAllCharacters(userId));
+            return Ok(await _characterService.GetAllCharacters());
         }
 
         [HttpGet("{id}")]
@@ -41,7 +41,7 @@ namespace dotnetRPG.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ServiceResponse<CharacterResponseDto>>> UpdateCharacter(int id, CharacterRequestDto updatedCharacter)
+        public async Task<ActionResult<ServiceResponse<List<CharacterResponseDto>>>> UpdateCharacter(int id, CharacterRequestDto updatedCharacter)
         {
             return Ok(await _characterService.UpdateCharacter(id, updatedCharacter));
         }
@@ -50,6 +50,12 @@ namespace dotnetRPG.Controllers
         public async Task<ActionResult<ServiceResponse<CharacterResponseDto>>> DeleteCharacter(int id)
         {
             return Ok(await _characterService.DeleteCharacter(id));
+        }
+
+        [HttpPost("Skill")]
+        public async Task<ActionResult<ServiceResponse<CharacterResponseDto>>> AddCharacterSkill(AddCharacterSkillDto addCharacterSkill)
+        {
+            return Ok(await _characterService.AddCharacterSkill(addCharacterSkill));
         }
     }
 }

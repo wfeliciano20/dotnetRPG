@@ -1,5 +1,6 @@
 using dotnetRPG.Data;
 using dotnetRPG.Services.CharacterServices;
+using dotnetRPG.Services.WeaponServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -26,6 +27,7 @@ builder.Services.AddSwaggerGen(c => {
 });
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IAuthRepository,AuthRepository>();
+builder.Services.AddScoped<IWeaponService, WeaponService>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // added this
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -39,7 +41,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         ValidateAudience = false
                     };
                 });
-
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
