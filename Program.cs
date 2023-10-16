@@ -1,5 +1,6 @@
 using dotnetRPG.Data;
 using dotnetRPG.Services.CharacterServices;
+using dotnetRPG.Services.FightServices;
 using dotnetRPG.Services.WeaponServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,7 @@ builder.Services.AddSwaggerGen(c => {
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 builder.Services.AddScoped<IAuthRepository,AuthRepository>();
 builder.Services.AddScoped<IWeaponService, WeaponService>();
+builder.Services.AddScoped<IFightService,FightService>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 // added this
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
